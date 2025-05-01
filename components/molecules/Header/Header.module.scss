@@ -1,0 +1,36 @@
+.header {
+  padding: 30px 0;
+  color: #3d3d3d;
+}
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 700;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: #0070f3;
+    }
+  }
+}

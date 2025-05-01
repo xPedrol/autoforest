@@ -1,0 +1,177 @@
+.defaultContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.bannerSection {
+  @extend .defaultContainer;
+  display: grid;
+  grid-template-columns: minmax(500px, 1fr) minmax(400px, 1.9fr);
+  align-items: center;
+  overflow: hidden;
+  z-index: 2;
+  animation: fadeIn 0.5s ease-in-out;
+  animation-duration: 0.5s;
+  .textContainer {
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 55px;
+  color: #3d3d3d;
+  span {
+    white-space: nowrap;
+  }
+}
+.imageContainer {
+  img {
+    width: 100%;
+    height: auto;
+    animation: upDown 2s ease-in-out infinite;
+  }
+}
+.aboutUsSection {
+  @extend .defaultContainer;
+  margin-top: 20px;
+  text-align: end;
+  h2 {
+    font-size: 40px;
+    color: #3d3d3d;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+.goalsSection {
+  @extend .defaultContainer;
+  margin-top: 100px;
+  width: 100%;
+  background-size: cover;
+  background-image: url('/images/forest.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 300px 0;
+  color: white;
+  animation: changeImage 10s infinite alternate;
+  .content {
+    padding-inline: 50px;
+    margin: -200px 0;
+  }
+  h2 {
+    font-size: 80px;
+    color: inherit;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 25px;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+}
+
+.cmSection {
+  @extend .defaultContainer;
+  position: relative;
+  margin-top: 200px;
+  width: 100%;
+  padding: 300px 0;
+  animation: changeImage 10s infinite alternate;
+  .content {
+    text-align: center;
+    margin: -200px 0;
+  }
+  h2 {
+    font-size: 80px;
+    color: inherit;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 25px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  .tree {
+    position: absolute;
+    top: -100px;
+    right: -1000px;
+    z-index: -1;
+  }
+  .tree2 {
+    position: absolute;
+    top: -100px;
+    left: -1050px;
+    z-index: -1;
+  }
+}
+
+.infoSection {
+  @extend .defaultContainer;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
+    border: 1px solid #e4e4e7;
+    transition: transform 0.3s ease;
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    button {
+      background-color: #fff;
+      padding: 10px 20px;
+      border: 1px solid #3d3d3d;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        color: #fff;
+        background-color: #3d3d3d;
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .bannerSection {
+    grid-template-columns: 1fr;
+  }
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 100%;
+      max-width: 700px;
+      min-width: 400px;
+      height: auto;
+    }
+  }
+}
