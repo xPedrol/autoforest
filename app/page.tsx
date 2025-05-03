@@ -1,12 +1,46 @@
+'use client'
 import Image from 'next/image'
 import style from './page.module.scss'
 import banner from '@/public/images/tree.png'
 import tree from '@/public/images/tree.png'
+import { useEffect } from 'react'
 export default function Home() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log(entry)
+          if (entry.isIntersecting) {
+            if (!entry.target.classList.contains(style.inView))
+              entry.target.classList.add(style.inView)
+            console.log('Section is in view')
+          }
+        })
+      },
+      {
+        threshold: 0.45,
+      },
+    )
+    const sections = [
+      ...document.querySelectorAll(`.${style.goalsSection}`),
+      ...document.querySelectorAll(`.${style.tree}`),
+      ...document.querySelectorAll(`.${style.tree2}`),
+      ...document.querySelectorAll(`.${style.cmSection}`),
+      ...document.querySelectorAll(`.${style.infoSection}`),
+    ]
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+    return () => {
+      sections.forEach((section) => {
+        observer.unobserve(section)
+      })
+    }
+  }, [])
   return (
     <main className="mainContainer">
       <section className={style.bannerSection}>
-        <div className={style.textContainer}>
+        <div>
           <h1 className={style.title}>
             Mussum Ipsum, cacilds vidis litro abertis.
           </h1>
@@ -26,7 +60,7 @@ export default function Home() {
         </div>
       </section>
       <section className={style.aboutUsSection}>
-        <div className={style.textContainer}>
+        <div>
           <h2 className={style.title}>Sobre nós</h2>
           <hr />
           <p>
@@ -37,8 +71,7 @@ export default function Home() {
         </div>
       </section>
       <section className={style.goalsSection}>
-        <div className={style.textContainer}>
-          <div className={style.padding}></div>
+        <div className={style.goalsTextContainer}>
           <div className={style.content}>
             <h2 className={style.title}>Objetivos</h2>
             <p>
@@ -64,8 +97,7 @@ export default function Home() {
           width={tree.width}
           height={tree.height}
         />
-        <div className={style.textContainer}>
-          <div className={style.padding}></div>
+        <div>
           <div className={style.content}>
             <h2 className={style.title}>
               Por que <span>usar ?</span>
