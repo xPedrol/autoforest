@@ -9,8 +9,11 @@ export default function Header() {
         </div>
         <nav className={style.navbar}>
           <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="#about">Sobre</Link>
+          <Link href="#goals">Objetivos</Link>
+          <Link href="#motivation">Motivação</Link>
+          <Link href="#plans">Planos</Link>
+          <Link href="#contact">Contato</Link>
         </nav>
       </div>
     </header>

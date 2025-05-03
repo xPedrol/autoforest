@@ -27,6 +27,7 @@ export default function Home() {
       ...document.querySelectorAll(`.${style.tree2}`),
       ...document.querySelectorAll(`.${style.cmSection}`),
       ...document.querySelectorAll(`.${style.infoSection}`),
+      ...document.querySelectorAll(`.${style.contactSection}`),
     ]
     sections.forEach((section) => {
       observer.observe(section)
@@ -59,7 +60,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className={style.aboutUsSection}>
+      <section className={style.aboutUsSection} id="about">
         <div>
           <h2 className={style.title}>Sobre nós</h2>
           <hr />
@@ -70,7 +71,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className={style.goalsSection}>
+      <section className={style.goalsSection} id="goals">
         <div className={style.goalsTextContainer}>
           <div className={style.content}>
             <h2 className={style.title}>Objetivos</h2>
@@ -82,7 +83,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={style.cmSection}>
+      <section className={style.cmSection} id="motivation">
         <Image
           className={style.tree}
           src={tree}
@@ -110,7 +111,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={style.infoSection}>
+      <section className={style.infoSection} id="plans">
         <div className={style.card}>
           <h2>Card Title</h2>
           <p>
@@ -135,6 +136,18 @@ export default function Home() {
           </p>
           <button className={style.button}>Learn More</button>
         </div>
+      </section>
+      <section className={style.contactSection} id="contact">
+        <div className={style.contactSectionHeader}>
+          <h2 className={style.title}>Entre em contato</h2>
+          <p>Preencha o formulário abaixo</p>
+        </div>
+        <form>
+          <input type="text" placeholder="Seu nome" required />
+          <input type="email" placeholder="Seu email" required />
+          <textarea rows={4} placeholder="Sua mensagem" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
       </section>
     </main>
   )
