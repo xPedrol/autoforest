@@ -25,7 +25,13 @@
   max-width: 1400px;
   margin: 0 auto;
 }
-
+.title {
+  font-size: 55px;
+  color: #3d3d3d;
+  span {
+    white-space: nowrap;
+  }
+}
 .bannerSection {
   @extend .defaultContainer;
   display: grid;
@@ -35,15 +41,13 @@
   z-index: 2;
   animation: fadeIn 0.5s ease-in-out;
   animation-duration: 0.5s;
-}
 
-.title {
-  font-size: 55px;
-  color: #3d3d3d;
-  span {
-    white-space: nowrap;
+  .homeTitle {
+    @extend .title;
+    opacity: 0;
   }
 }
+
 .imageContainer {
   img {
     width: 100%;
@@ -105,7 +109,7 @@
   }
 }
 
-.cmSection {
+.motivationSection {
   @extend .defaultContainer;
   position: relative;
   margin-top: 200px;
@@ -274,7 +278,7 @@
 }
 @media (max-width: 1000px) {
   .goalsSection,
-  .cmSection {
+  .motivationSection {
     h2 {
       font-size: 50px;
     }

@@ -1,49 +1,36 @@
 'use client'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import style from './page.module.scss'
 import banner from '@/public/images/tree.png'
 import tree from '@/public/images/tree.png'
-import { useEffect } from 'react'
+import { typeEffect } from '@/utils/typeEffect'
+import { initObserver, unobserve } from '@/utils/intersectionObserver'
+const homeTitle = 'Mussum Ipsum, cacilds vidis litro abertis.'
 export default function Home() {
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log(entry)
-          if (entry.isIntersecting) {
-            if (!entry.target.classList.contains(style.inView))
-              entry.target.classList.add(style.inView)
-            console.log('Section is in view')
-          }
-        })
-      },
-      {
-        threshold: 0.45,
-      },
-    )
+    const homeTitleElement = document.getElementById('homeTitle')
+    typeEffect(homeTitle, homeTitleElement)
+
     const sections = [
       ...document.querySelectorAll(`.${style.goalsSection}`),
       ...document.querySelectorAll(`.${style.tree}`),
       ...document.querySelectorAll(`.${style.tree2}`),
-      ...document.querySelectorAll(`.${style.cmSection}`),
+      ...document.querySelectorAll(`.${style.motivationSection}`),
       ...document.querySelectorAll(`.${style.infoSection}`),
       ...document.querySelectorAll(`.${style.contactSection}`),
     ]
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
+    initObserver(style.inView, sections)
     return () => {
-      sections.forEach((section) => {
-        observer.unobserve(section)
-      })
+      unobserve(sections)
     }
   }, [])
   return (
     <main className="mainContainer">
       <section className={style.bannerSection}>
         <div>
-          <h1 className={style.title}>
-            Mussum Ipsum, cacilds vidis litro abertis.
+          <h1 className={style.homeTitle} id="homeTitle">
+            {homeTitle}
           </h1>
           <p>
             Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie
@@ -83,7 +70,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={style.cmSection} id="motivation">
+      <section className={style.motivationSection} id="motivation">
         <Image
           className={style.tree}
           src={tree}
