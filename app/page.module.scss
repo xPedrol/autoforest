@@ -85,6 +85,10 @@
   }
   .content {
     padding-inline: 50px;
+    @media (max-width: 1000px) {
+      padding-inline: 20px;
+      text-align: center;
+    }
     margin: -200px 0;
     opacity: 0;
     transform: translateX(-200px);
@@ -149,6 +153,12 @@
     .tree,
     .tree2 {
       transform: translateX(0px);
+    }
+  }
+  @media (orientation: portrait) {
+    .tree,
+    .tree2 {
+      display: none;
     }
   }
 }
