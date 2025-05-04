@@ -27,7 +27,7 @@
 }
 .title {
   font-size: 55px;
-  color: var(--light-black) span {
+  span {
     white-space: nowrap;
   }
 }
@@ -73,7 +73,7 @@
   margin-top: 100px;
   width: 100%;
   background-size: cover;
-  background-image: url('/images/forest.jpeg');
+  background-image: url('/images/forest.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;

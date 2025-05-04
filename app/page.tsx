@@ -2,8 +2,8 @@
 import Image from 'next/image'
 import { useEffect } from 'react'
 import style from './page.module.scss'
-import banner from '@/public/images/tree.png'
-import tree from '@/public/images/tree.png'
+import banner from '@/public/images/tree.webp'
+import tree from '@/public/images/tree.webp'
 import { typeEffect } from '@/utils/typeEffect'
 import { initObserver, unobserve } from '@/utils/intersectionObserver'
 import { Card } from '@/components/atoms/Card'
@@ -44,10 +44,12 @@ export default function Home() {
         </div>
         <div className={style.imageContainer}>
           <Image
+            loading="eager"
             src={banner}
             alt="Banner Image"
             width={banner.width}
             height={banner.height}
+            quality={40}
           />
         </div>
       </section>
@@ -76,13 +78,16 @@ export default function Home() {
       </section>
       <section className={style.motivationSection} id="motivation">
         <Image
+          loading="lazy"
           className={style.tree}
           src={tree}
           alt="Tree Image"
           width={tree.width}
           height={tree.height}
+          quality={40}
         />
         <Image
+          loading="lazy"
           className={style.tree2}
           src={tree}
           alt="Tree Image"
