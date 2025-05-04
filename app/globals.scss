@@ -30,3 +30,8 @@ h5,
 h6 {
   color: var(--light-black);
 }
+
+::selection {
+  background: var(--light-green);
+  color: var(--black);
+}
