@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import style from './header.module.scss'
+import style from './header1.module.scss'
 import { AlignJustify, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 const NavbarItems = () => {
