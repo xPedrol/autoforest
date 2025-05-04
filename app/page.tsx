@@ -6,6 +6,10 @@ import banner from '@/public/images/tree.png'
 import tree from '@/public/images/tree.png'
 import { typeEffect } from '@/utils/typeEffect'
 import { initObserver, unobserve } from '@/utils/intersectionObserver'
+import { Card } from '@/components/atoms/Card'
+import { Input } from '@/components/atoms/Input'
+import { Textarea } from '@/components/atoms/Textarea'
+import { Button } from '@/components/atoms/Button'
 const homeTitle = 'Mussum Ipsum, cacilds vidis litro abertis.'
 export default function Home() {
   useEffect(() => {
@@ -99,29 +103,14 @@ export default function Home() {
         </div>
       </section>
       <section className={style.infoSection} id="plans">
-        <div className={style.card}>
-          <h2>Card Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <button className={style.button}>Learn More</button>
+        <div className={style.cardAnimation}>
+          <Card />
         </div>
-        <div className={style.card}>
-          <h2>Card Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <button className={style.button}>Learn More</button>
+        <div className={style.cardAnimation}>
+          <Card />
         </div>
-        <div className={style.card}>
-          <h2>Card Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <button className={style.button}>Learn More</button>
+        <div className={style.cardAnimation}>
+          <Card />
         </div>
       </section>
       <section className={style.contactSection} id="contact">
@@ -130,10 +119,12 @@ export default function Home() {
           <p>Preencha o formulário abaixo</p>
         </div>
         <form>
-          <input type="text" placeholder="Seu nome" required />
-          <input type="email" placeholder="Seu email" required />
-          <textarea rows={4} placeholder="Sua mensagem" required></textarea>
-          <button type="submit">Enviar</button>
+          <Input format="large" type="text" placeholder="Seu nome" required />
+          <Input format="large" type="email" placeholder="Seu email" required />
+          <Textarea rows={4} placeholder="Sua mensagem" required />
+          <Button format="large" type="submit">
+            Enviar
+          </Button>
         </form>
       </section>
     </main>

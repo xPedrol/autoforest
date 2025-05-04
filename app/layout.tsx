@@ -1,6 +1,6 @@
+import './globals.scss'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import './globals.scss'
 import Header from '@/components/molecules/Header'
 const atlassianFont = localFont({ src: './atlassian-sans.woff2' })
 export const metadata: Metadata = {

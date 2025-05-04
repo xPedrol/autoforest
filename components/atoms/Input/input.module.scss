@@ -1,0 +1,27 @@
+.input {
+  padding: 20px;
+  border: 1px solid #e4e4e7;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.small {
+  padding: 10px;
+}
+
+.medium {
+  padding: 13px;
+}
+
+.large {
+  font-size: 16px;
+}
+
+.input[type='checkbox'] {
+  width: 25px;
+  height: 25px;
+  accent-color: var(--green);
+  border: 1px solid var(--light-black);
+  vertical-align: middle;
+  cursor: pointer;
+}

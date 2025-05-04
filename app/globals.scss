@@ -1,3 +1,11 @@
+:root {
+  --light-green: #a5d6a7;
+  --green: #4caf50;
+  --light-black: #3d3d3d;
+  --white: #ffffff;
+  --dark-white: #e4e4e7;
+  --black: #000000;
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,7 +19,7 @@ html {
   @media (max-width: 1400px) {
     padding-inline: 15px;
   }
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 h1,
@@ -20,5 +28,5 @@ h3,
 h4,
 h5,
 h6 {
-  color: #3d3d3d;
+  color: var(--light-black);
 }
