@@ -1,36 +1,28 @@
 'use client'
 import Link from 'next/link'
-import style from './header.module.scss'
+import style from './clientHeader.module.scss'
 import { AlignJustify, X } from 'lucide-react'
 import { useResponsiveMenu } from '@/hooks/useResponsiveMenu'
+
 const NavbarItems = () => {
   return (
     <>
-      <Link href="/" className={style.navLink}>
-        Home
+      <Link href="/dashboard" className={style.navLink}>
+        Dashboard
       </Link>
-      <Link href="/#about" className={style.navLink}>
-        Sobre
+      <Link href="/dashboard" className={style.navLink}>
+        Analisar Planilha
       </Link>
-      <Link href="/#goals" className={style.navLink}>
-        Objetivos
-      </Link>
-      <Link href="/#motivation" className={style.navLink}>
-        Motivação
-      </Link>
-      <Link href="/#plans" className={style.navLink}>
-        Planos
-      </Link>
-      <Link href="/#contact" className={style.navLink}>
-        Contato
-      </Link>
-      <Link href="/entrar" prefetch={false} className={style.navLink}>
-        Area do cliente
-      </Link>
+      <div className={style.profile}>
+        <p className={style.profileName}>Nome do Usuário</p>/
+        <Link href="/logout" className={style.profileLogout}>
+          Deslogar
+        </Link>
+      </div>
     </>
   )
 }
-export default function Header() {
+export default function ClientHeader() {
   const { toggleMenu, burgerMenuOpened } = useResponsiveMenu({ style })
   return (
     <header className={style.header}>

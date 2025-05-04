@@ -5,6 +5,9 @@
   --white: #ffffff;
   --dark-white: #e4e4e7;
   --black: #000000;
+  --light-red: #ef9a9a;
+  --light-yellow: #fff59d;
+  --light-blue: #90caf9;
 }
 * {
   box-sizing: border-box;
@@ -16,7 +19,7 @@ html {
 }
 .mainContainer {
   padding: 40px 0 40px 0;
-  @media (max-width: 1400px) {
+  @media (max-width: 1600px) {
     padding-inline: 15px;
   }
   overflow: hidden;

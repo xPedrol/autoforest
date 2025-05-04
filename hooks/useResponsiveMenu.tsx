@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
-import style from '../components/molecules/Header/header.module.scss'
-export const useResponsiveMenu = () => {
+type Menu = {
+  style: {
+    readonly [key: string]: string
+  }
+}
+export const useResponsiveMenu = ({ style }: Menu) => {
   const [burgerMenuOpened, setBurgerMenuOpened] = useState(false)
   const toggleMenu = () => {
     const burgerMenu = document.querySelector(`.${style.burgerMenu}`)

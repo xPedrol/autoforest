@@ -1,0 +1,99 @@
+.header {
+  padding: 30px 0;
+  color: var(--light-black);
+}
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 700;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  @media (orientation: portrait) {
+    display: none;
+  }
+}
+.navLink {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: var(--light-green);
+  }
+}
+.burgerMenu {
+  z-index: 1000;
+  width: 100%;
+  max-height: 0px;
+  overflow: hidden;
+  position: absolute;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-inline: 20px;
+  transition: all 0.4s ease-in-out;
+  margin-top: 20px;
+  &.inView {
+    width: 100%;
+    max-height: 220px;
+  }
+  .navLink {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--light-black);
+    &:hover {
+      color: var(--light-green);
+      border-bottom: 1px solid var(--light-green);
+    }
+  }
+}
+.burger {
+  display: none;
+  @media (orientation: portrait) {
+    display: block;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--light-black);
+  @media (orientation: portrait) {
+    font-size: 20px !important;
+    padding-bottom: 60px;
+    font-size: 20px !important;
+  }
+  .profileName {
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: var(--light-green);
+    }
+  }
+  .profileLogout {
+    color: var(--light-black);
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: var(--light-red);
+    }
+  }
+}
