@@ -4,6 +4,8 @@
   --light-black: #3d3d3d;
   --white: #ffffff;
   --dark-white: #e4e4e7;
+  --white-50: #f7f7f7;
+  --white-100: #ccc;
   --black: #000000;
   --light-red: #ef9a9a;
   --light-yellow: #fff59d;
@@ -16,6 +18,7 @@
 }
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 .mainContainer {
   padding: 40px 0 40px 0;

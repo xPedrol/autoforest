@@ -1,13 +1,21 @@
+import { AnchorButton } from '../AnchorButton'
 import style from './card.module.scss'
-export const Card = () => {
+type CardProps = {
+  title: string
+  description: string
+  buttonText: string
+  href?: string
+}
+export const Card = ({ title, description, buttonText, href }: CardProps) => {
   return (
-    <article className={`${style.card} cardForAnimation`}>
-      <h2>Card Title</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <button className={style.button}>Learn More</button>
+    <article className={`${style.card}`}>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      {href && (
+        <AnchorButton format="small" href={href} className={style.link}>
+          {buttonText}
+        </AnchorButton>
+      )}
     </article>
   )
 }

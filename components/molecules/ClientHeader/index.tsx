@@ -10,15 +10,15 @@ const NavbarItems = () => {
       <Link href="/dashboard" className={style.navLink}>
         Dashboard
       </Link>
-      <Link href="/dashboard" className={style.navLink}>
+      <Link href="/analise-de-dados" className={style.navLink}>
         Analisar Planilha
       </Link>
-      <div className={style.profile}>
+      {/* <div className={style.profile}>
         <p className={style.profileName}>Nome do Usuário</p>/
         <Link href="/logout" className={style.profileLogout}>
           Deslogar
         </Link>
-      </div>
+      </div> */}
     </>
   )
 }
@@ -28,7 +28,7 @@ export default function ClientHeader() {
     <header className={style.header}>
       <div className={style.container}>
         <div className={style.logo}>
-          <p>Auto Forest</p>
+          <Link href="/">Auto Forest</Link>
         </div>
         <div className={style.burger} onClick={toggleMenu}>
           {!burgerMenuOpened ? <AlignJustify size={32} /> : <X size={32} />}

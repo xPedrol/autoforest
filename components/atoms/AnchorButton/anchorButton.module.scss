@@ -1,0 +1,28 @@
+.anchor {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid var(--light-black);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+  transition: background-color 0.3s ease;
+  &:hover {
+    color: #fff;
+    background-color: var(--light-black);
+  }
+}
+
+.small {
+  padding: 7px;
+  font-size: 12px;
+}
+
+.medium {
+  padding: 13px;
+  font-size: 14px;
+}
+
+.large {
+  padding: 16px;
+  font-size: 16px;
+}

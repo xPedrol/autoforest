@@ -4,18 +4,13 @@ import { useEffect } from 'react'
 import style from './page.module.scss'
 import banner from '@/public/images/tree.webp'
 import tree from '@/public/images/tree.webp'
-import { typeEffect } from '@/utils/typeEffect'
 import { initObserver, unobserve } from '@/utils/intersectionObserver'
 import { Card } from '@/components/atoms/Card'
 import { Input } from '@/components/atoms/Input'
 import { Textarea } from '@/components/atoms/Textarea'
 import { Button } from '@/components/atoms/Button'
-const homeTitle = 'Mussum Ipsum, cacilds vidis litro abertis.'
 export default function Home() {
   useEffect(() => {
-    const homeTitleElement = document.getElementById('homeTitle')
-    typeEffect(homeTitle, homeTitleElement)
-
     const sections = [
       ...document.querySelectorAll(`.${style.goalsSection}`),
       ...document.querySelectorAll(`.${style.tree}`),
@@ -34,7 +29,7 @@ export default function Home() {
       <section className={style.bannerSection}>
         <div>
           <h1 className={style.homeTitle} id="homeTitle">
-            {homeTitle}
+            Mussum Ipsum, cacilds vidis litro abertis.
           </h1>
           <p>
             Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie
@@ -109,13 +104,25 @@ export default function Home() {
       </section>
       <section className={style.infoSection} id="plans">
         <div className={style.cardAnimation}>
-          <Card />
+          <Card
+            title="Plano 1"
+            description="Descrição do Plano 1"
+            buttonText="Saiba mais"
+          />
         </div>
         <div className={style.cardAnimation}>
-          <Card />
+          <Card
+            title="Plano 2"
+            description="Descrição do Plano 2"
+            buttonText="Saiba mais"
+          />
         </div>
         <div className={style.cardAnimation}>
-          <Card />
+          <Card
+            title="Plano 3"
+            description="Descrição do Plano 3"
+            buttonText="Saiba mais"
+          />
         </div>
       </section>
       <section className={style.contactSection} id="contact">

@@ -36,7 +36,7 @@ export default function Header() {
     <header className={style.header}>
       <div className={style.container}>
         <div className={style.logo}>
-          <p>Auto Forest</p>
+          <Link href="/">Auto Forest</Link>
         </div>
         <div className={style.burger} onClick={toggleMenu}>
           {!burgerMenuOpened ? <AlignJustify size={32} /> : <X size={32} />}

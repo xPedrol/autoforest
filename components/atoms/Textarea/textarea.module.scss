@@ -4,5 +4,7 @@
   font-size: 16px;
   font-family: inherit;
   // expading x-axis to fill the parent container
-  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
 }

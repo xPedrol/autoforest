@@ -9,7 +9,7 @@ export const initObserver = (className: string, sections: Element[]) => {
       })
     },
     {
-      threshold: 0.45,
+      threshold: 0.25,
     },
   )
   sections.forEach((section) => {
