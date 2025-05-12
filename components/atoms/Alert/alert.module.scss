@@ -1,10 +1,14 @@
-.success {
+.alert {
+  width: 100%;
   display: flex;
   align-items: center;
-  max-width: 400px;
   padding: 20px;
   background-color: var(--light-green);
   gap: 10px;
+
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 .red {

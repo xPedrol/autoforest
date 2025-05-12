@@ -12,7 +12,7 @@ export const createGroqBody = (headerList: string, sampleRow: string) => {
       role: 'system',
       content: `
 Você é um analista de dados especializado.  
-Receberá nomes de colunas e exemplos de dados; retorne um bloco HTML resumido, sem tags de título ou cabeçalho.  
+Receberá nomes de colunas e exemplos de dados, representando informações sobre a cadeia de custodia florestal de uma empresa; retorne um bloco HTML resumido, sem tags de título ou cabeçalho.  
 Para cada coluna:
 - <p><strong>o nome da coluna</strong>:
 - Abaixo, uma breve análise em texto corrido  

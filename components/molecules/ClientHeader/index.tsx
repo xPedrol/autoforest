@@ -7,7 +7,7 @@ import { useResponsiveMenu } from '@/hooks/useResponsiveMenu'
 const NavbarItems = () => {
   return (
     <>
-      <Link href="/dashboard" className={style.navLink}>
+      <Link href="/painel-de-controle" className={style.navLink}>
         Dashboard
       </Link>
       <Link href="/analise-de-dados" className={style.navLink}>

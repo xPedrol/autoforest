@@ -1,11 +1,13 @@
 'use client'
 import { Button } from '@/components/atoms/Button'
 import style from './analysis.module.scss'
-import { Upload } from 'lucide-react'
-import { ChangeEvent, useState } from 'react'
+import { Info, Upload } from 'lucide-react'
+import { ChangeEvent, DragEvent, useState } from 'react'
 import readXlsxFile from 'read-excel-file'
 import { createGroqBody, groqClient } from '@/configs/groq'
 import { Mosaic } from 'react-loading-indicators'
+import { Alert } from '@/components/atoms/Alert'
+import { RelatedColumnCard } from '@/components/atoms/RelatedColumnCard'
 
 export default function Analysis() {
   const [file, setFile] = useState<File | null>(null)
@@ -13,11 +15,16 @@ export default function Analysis() {
   const [jsonData, setJsonData] = useState<Record<string, string>[]>([])
   const [apiResponse, setApiResponse] = useState<string>('')
   const [loading, setLoading] = useState(false)
-
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return
+  const handleFileChange = async (
+    event: ChangeEvent<HTMLInputElement> | File,
+  ) => {
     if (loading) return
-    const file = event.target.files[0]
+    let file: File | null = null
+    if (event instanceof File) {
+      file = event
+    } else if (event.target.files) {
+      file = event.target.files[0]
+    }
     if (!file) return
 
     setFile(file)
@@ -44,7 +51,6 @@ export default function Analysis() {
         stream: true,
         messages: createGroqBody(headerList, sampleRow),
       })
-
       // Consumir o stream incrementalmente
       let accumulated = ''
       for await (const part of stream) {
@@ -61,14 +67,30 @@ export default function Analysis() {
     }
   }
 
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    debugger
+    if (loading) return
+    const files = event.dataTransfer.files
+    if (files.length > 0) {
+      const file = files[0]
+      setFile(file)
+      handleFileChange(file)
+    }
+  }
   const handleFileUpload = () => {
     document.querySelector<HTMLInputElement>('#fileInput')?.click()
   }
 
   return (
     <main className="mainContainer">
-      <div className={style.analysisContainer}>
-        <div className={style.uploadContainer}>
+      <section className={style.analysisSection}>
+        <div
+          className={style.uploadContainer}
+          onDrop={handleDrop}
+          onDragOver={(e) => e.preventDefault()}
+          onDragEnter={(e) => e.preventDefault()}
+        >
           <Upload />
           <h3>Análise de Dados</h3>
           {file ? (
@@ -86,14 +108,14 @@ export default function Analysis() {
           <input
             id="fileInput"
             type="file"
-            accept=".xlsx, .xls, .csv"
+            accept=".xlsx, .xls"
             className={style.hiddenInput}
             onChange={handleFileChange}
           />
         </div>
 
         <div className={style.tableContainer}>
-          {jsonData.length > 0 ? (
+          {headers.length > 0 ? (
             <>
               <div className={style.tableWrapper}>
                 <table>
@@ -138,7 +160,28 @@ export default function Analysis() {
             <p>Nenhum arquivo processado</p>
           )}
         </div>
-      </div>
+      </section>
+      {headers.length > 0 && (
+        <section className={style.columnsSection}>
+          <h3>Colunas Esperadas</h3>
+          <div className={style.columnsSectionAlert}>
+            <Alert
+              color="blue"
+              icon={<Info />}
+              description="Nosso sistema precisa padronizar as colunas fornecidas para realizar os devidos cálculos. Dessa forma, tentemos relacionar cada coluna da sua planilha com as colunas esperadas pelo sistema. Abaixo você pode ver e editar essas relações. "
+            />
+          </div>
+          <div className={style.columnsRow}>
+            {headers.map((header, i) => (
+              <RelatedColumnCard
+                key={i}
+                systemHeader={`Coluna ${i + 1}`}
+                providedHeader={header}
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   )
 }
