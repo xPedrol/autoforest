@@ -3,9 +3,9 @@
   --green: #4caf50;
   --light-black: #3d3d3d;
   --white: #ffffff;
-  --dark-white: #e4e4e7;
-  --white-50: #f7f7f7;
-  --white-100: #ccc;
+  --dark-white: #d1d1d6;
+  --white-50: #f2f2f2;
+  --white-100: #9e9e9e;
   --black: #000000;
   --light-red: #ef9a9a;
   --light-yellow: #fff59d;
@@ -40,4 +40,38 @@ h6 {
 ::selection {
   background: var(--light-green);
   color: var(--black);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Main viewport scrollbar */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--light-black);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--white-100);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--white-100);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-black);
 }
