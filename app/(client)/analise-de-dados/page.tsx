@@ -2,18 +2,25 @@
 import { Button } from '@/components/atoms/Button'
 import style from './analysis.module.scss'
 import { Info, Upload } from 'lucide-react'
-import { ChangeEvent, DragEvent, useState } from 'react'
+import { ChangeEvent, DragEvent, useMemo, useState } from 'react'
 import readXlsxFile from 'read-excel-file'
-import { createGroqBody, groqClient } from '@/configs/groq'
+import {
+  createGroqColumnsBody,
+  createGroqDescriptionBody,
+  groqClient,
+} from '@/configs/groq'
 import { Mosaic } from 'react-loading-indicators'
 import { Alert } from '@/components/atoms/Alert'
 import { RelatedColumnCard } from '@/components/atoms/RelatedColumnCard'
+import { TRelatedColumn } from '@/types/relatedColumn'
+import { systemColumnsDescription } from '@/configs/columns'
 
 export default function Analysis() {
   const [file, setFile] = useState<File | null>(null)
   const [headers, setHeaders] = useState<string[]>([])
   const [jsonData, setJsonData] = useState<Record<string, string>[]>([])
-  const [apiResponse, setApiResponse] = useState<string>('')
+  const [apiJSON, setApiJSON] = useState<TRelatedColumn[]>([])
+  const [relatedDescription, setRelatedDescription] = useState<string>('')
   const [loading, setLoading] = useState(false)
   const handleFileChange = async (
     event: ChangeEvent<HTMLInputElement> | File,
@@ -39,29 +46,37 @@ export default function Analysis() {
     setJsonData(sample)
 
     setLoading(true)
-    setApiResponse('')
+    setApiJSON([])
 
     // Preparar strings para o prompt
     const headerList = cols.join(', ')
-    const sampleRow = rows[1].join(', ')
 
     try {
-      const stream = await groqClient.chat.completions.create({
+      let apiRes = await groqClient.chat.completions.create({
         model: 'llama-3.3-70b-versatile',
-        stream: true,
-        messages: createGroqBody(headerList, sampleRow),
+        messages: createGroqColumnsBody(headerList),
       })
-      // Consumir o stream incrementalmente
-      let accumulated = ''
-      for await (const part of stream) {
-        const delta = part.choices?.[0]?.delta?.content
-        if (delta) {
-          accumulated += delta
-          setApiResponse(accumulated)
+      if (apiRes.choices?.[0]?.message.content) {
+        const apiJSONAux = JSON.parse(apiRes.choices[0].message.content)
+        setApiJSON(apiJSONAux)
+        console.log('Resposta da API:', apiJSONAux)
+        apiRes = await groqClient.chat.completions.create({
+          model: 'llama-3.3-70b-versatile',
+          messages: createGroqDescriptionBody(apiJSONAux),
+        })
+        if (apiRes.choices?.[0]?.message.content) {
+          const apiDescription = apiRes.choices[0].message.content
+          setRelatedDescription(apiDescription)
+          console.log('Resposta da API:', apiDescription)
+        } else {
+          throw new Error('Erro ao tentar detalhar a relação das colunas')
         }
+      } else {
+        throw new Error('Erro ao tentar relacionar as colunas')
       }
     } catch (err) {
       console.error('Erro na API Groq:', err)
+      setApiJSON([])
     } finally {
       setLoading(false)
     }
@@ -81,7 +96,9 @@ export default function Analysis() {
   const handleFileUpload = () => {
     document.querySelector<HTMLInputElement>('#fileInput')?.click()
   }
-
+  const clientColumnsArray = useMemo(() => {
+    return apiJSON.map((item) => item.client)
+  }, [apiJSON])
   return (
     <main className="mainContainer">
       <section className={style.analysisSection}>
@@ -139,19 +156,24 @@ export default function Analysis() {
               </div>
 
               <div className={style.columnAnalysis}>
-                <h3>Resultado da Análise</h3>
+                <h3>Relações Encontradas</h3>
+                <Alert
+                  color="blue"
+                  icon={<Info />}
+                  description="Para realizar os cálculos adequadamente, precisamos mapear as colunas da sua planilha com nosso sistema padrão. Abaixo você encontrará as relações sugeridas entre suas colunas e as colunas do sistema. Você pode revisar e ajustar essas relações conforme necessário."
+                />
                 {loading && (
                   <p className={style.statusText}>
                     <Mosaic size="small" color="#ccc" />
                   </p>
                 )}
-                {!loading && apiResponse && (
+                {!loading && relatedDescription && (
                   <div
                     className={style.chartContainer}
-                    dangerouslySetInnerHTML={{ __html: apiResponse }}
+                    dangerouslySetInnerHTML={{ __html: relatedDescription }}
                   />
                 )}
-                {!loading && !apiResponse && (
+                {!loading && !relatedDescription && (
                   <p className={style.statusText}>Sem resposta da API</p>
                 )}
               </div>
@@ -161,22 +183,22 @@ export default function Analysis() {
           )}
         </div>
       </section>
-      {headers.length > 0 && (
+      {apiJSON.length > 0 && (
         <section className={style.columnsSection}>
-          <h3>Colunas Esperadas</h3>
-          <div className={style.columnsSectionAlert}>
-            <Alert
-              color="blue"
-              icon={<Info />}
-              description="Nosso sistema precisa padronizar as colunas fornecidas para realizar os devidos cálculos. Dessa forma, tentemos relacionar cada coluna da sua planilha com as colunas esperadas pelo sistema. Abaixo você pode ver e editar essas relações. "
-            />
-          </div>
+          <h3>Altere as relações entre as colunas</h3>
+          <div className={style.columnsSectionAlert}></div>
           <div className={style.columnsRow}>
-            {headers.map((header, i) => (
+            {apiJSON.map((item) => (
               <RelatedColumnCard
-                key={i}
-                systemHeader={`Coluna ${i + 1}`}
-                providedHeader={header}
+                key={`${item.system}-${item.client}`}
+                systemHeader={item.system}
+                providedHeader={item.client}
+                columns={clientColumnsArray}
+                description={
+                  systemColumnsDescription[
+                    item.system as keyof typeof systemColumnsDescription
+                  ]
+                }
               />
             ))}
           </div>

@@ -24,12 +24,8 @@ const NavbarItems = () => {
       <Link href="/#contact" className={style.navLink}>
         Contato
       </Link>
-      <Link
-        href="/painel-de-controle"
-        prefetch={false}
-        className={style.navLink}
-      >
-        Area do cliente
+      <Link href="/analise-de-dados" prefetch={false} className={style.navLink}>
+        Analisar Planilha
       </Link>
     </>
   )
