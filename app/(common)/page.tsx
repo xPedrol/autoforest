@@ -45,6 +45,7 @@ export default function Home() {
             width={banner.width}
             height={banner.height}
             quality={40}
+            priority={true}
           />
         </div>
       </section>
