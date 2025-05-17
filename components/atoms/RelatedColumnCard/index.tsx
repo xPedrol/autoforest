@@ -1,20 +1,16 @@
 import style from './relatedColumnCard.module.scss'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Select } from '../Select'
+import { IRelatedColumn } from '@/types/relatedColumn'
 type Props = {
-  systemHeader: string
-  providedHeader: string
+  item: IRelatedColumn
   description: string
   columns: string[]
 }
-export const RelatedColumnCard = ({
-  systemHeader,
-  providedHeader,
-  description,
-  columns,
-}: Props) => {
+export const RelatedColumnCard = ({ item, description, columns }: Props) => {
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const chevronRef = useRef<SVGSVGElement>(null)
+  const setUpdateTimes = useState(0)[1]
   const openDescription = () => {
     if (descriptionRef.current) {
       descriptionRef.current.classList.toggle(style.open)
@@ -23,21 +19,24 @@ export const RelatedColumnCard = ({
       chevronRef.current.classList.toggle(style.open)
     }
   }
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    item.client = event.target.value
+    setUpdateTimes((prev) => prev + 1)
+  }
   return (
     <article className={style.columnItem}>
       <div className={style.columnItemHeader} onClick={openDescription}>
         <div className={style.columnItemHeaderText}>
           <h4>
-            <span>Sistema:</span> {systemHeader}
+            <span>Sistema:</span> {item.system}
           </h4>
         </div>
-        {/* <Plus ref={chevronRef} /> */}
       </div>
       <p className={style.columnItemDescription} ref={descriptionRef}>
         <strong>Descrição da coluna do sistema:</strong> {description}
       </p>
       <div className={style.selectContainer}>
-        <Select defaultValue={providedHeader}>
+        <Select value={item.client} onChange={handleSelectChange}>
           <option value="" disabled>
             Selecione a coluna relacionada na sua planilha
           </option>

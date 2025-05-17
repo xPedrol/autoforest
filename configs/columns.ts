@@ -1,50 +1,100 @@
-import { TRelatedColumn } from '@/types/relatedColumn'
-
-export const systemColumns = [
-  'fazenda',
-  'talhao',
-  'medicao',
-  'parcela',
-  'digitacao',
-  'c1c2',
-  'l1l2',
-  'fila',
-  'numeroArvore',
-  'cap',
-  'ht',
-  'status',
-]
-export const systemColumnsDescription = {
-  fazenda: 'Nome da fazenda onde a árvore está localizada.',
-  talhao: 'Nome do talhão onde a árvore está localizada.',
-  medicao: 'Data da medição da árvore.',
-  parcela: 'Número da parcela onde a árvore está localizada.',
-  digitacao: 'Data da digitação dos dados da árvore.',
-  c1c2: 'C1 e C2 são os diâmetros da árvore medidos em centímetros.',
-  l1l2: 'L1 e L2 são as alturas da árvore medidas em metros.',
-  fila: 'Número da fila onde a árvore está localizada.',
-  numeroArvore: 'Número da árvore dentro do talhão.',
-  cap: 'Capacidade de crescimento da árvore.',
-  ht: 'Altura total da árvore.',
-  status: 'Status da árvore (ativa, inativa, etc.).',
+const cadastroColumns = {
+  columns: [
+    'id_Talhao',
+    'Fazenda',
+    'Projeto',
+    'Talhao',
+    'AreaTalhao',
+    'MatGenetico',
+    'Espacamento',
+    'DataRotacao',
+  ],
+  description: {
+    id_Talhao: 'ID do talhão onde a árvore está localizada.',
+    fazenda: 'Nome da fazenda onde a árvore está localizada.',
+    projeto: 'Nome do projeto onde a árvore está localizada.',
+    talhao: 'Nome do talhão onde a árvore está localizada.',
+    areaTalhao: 'Área do talhão onde a árvore está localizada.',
+    matGenetico: 'Matriz genética da árvore.',
+    espacamento: 'Espaçamento entre as árvores.',
+    dataRotacao: 'Data da rotação da árvore.',
+    status: 'Status da árvore (ativa, inativa, etc.).',
+  },
 }
 
-export const stringifySystemColumns = () => {
-  return systemColumns
-    .map((column) => {
-      const description =
-        systemColumnsDescription[
-          column as keyof typeof systemColumnsDescription
-        ]
-      return `${column}: ${description}`
-    })
-    .join(', ')
+const inventarioColumns = {
+  columns: [
+    'id_Talhao',
+    'Parcela',
+    'DataMedicao',
+    'CoordenadaX',
+    'CoordenadaY',
+    'AreaParcela_m2',
+    'Fila',
+    'Cova',
+    'Fuste',
+    'dap_cm',
+    'HtObs_m',
+    'Codigo',
+  ],
+  description: {
+    id_Talhao: 'ID do talhão onde a árvore está localizada.',
+    parcela: 'Número da parcela onde a árvore está localizada.',
+    dataMedicao: 'Data da medição da árvore.',
+    coordenadaX: 'Coordenada X da árvore.',
+    coordenadaY: 'Coordenada Y da árvore.',
+    areaParcela_m2: 'Área da parcela onde a árvore está localizada (em m²).',
+    fila: 'Número da fila onde a árvore está localizada.',
+    cova: 'Número da cova onde a árvore está localizada.',
+    fuste: 'Número do fuste da árvore.',
+    dap_cm: 'Diâmetro à altura do peito da árvore (em cm).',
+    htObs_m: 'Altura total da árvore (em m).',
+    codigo: 'Código identificador da árvore.',
+    status: 'Status da árvore (ativa, inativa, etc.).',
+  },
 }
 
-export const stringifyRelatedColumns = (relatedColumns: TRelatedColumn[]) => {
-  return relatedColumns
-    .map((column) => {
-      return `Coluna do cliente: ${column.client}, Coluna sistema: ${column.system}`
-    })
-    .join(', ')
+export abstract class Columns {
+  protected list: string[]
+  protected description: Record<string, string>
+  public uploadDescription: string
+  constructor() {
+    this.list = []
+    this.description = {}
+    this.uploadDescription = ''
+  }
+
+  public stringifyDescriptions() {
+    return this.list.join(', ')
+  }
+
+  public stringifyColumns() {
+    return this.list
+      .map((column) => {
+        return `Coluna: ${column}`
+      })
+      .join(', ')
+  }
+
+  public getDescription(column: string) {
+    return this.description[column] || 'Descrição não encontrada'
+  }
+}
+
+export class CadastroColumns extends Columns {
+  constructor() {
+    super()
+    this.list = cadastroColumns.columns
+    this.description = cadastroColumns.description
+    this.uploadDescription = 'Submeta sua planilha de cadastro florestal'
+  }
+}
+
+export class InventarioColumns extends Columns {
+  constructor() {
+    super()
+    this.list = inventarioColumns.columns
+    this.description = inventarioColumns.description
+    this.uploadDescription = 'Submeta sua planilha de inventário florestal'
+  }
 }
