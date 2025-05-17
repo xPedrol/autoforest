@@ -1,8 +1,6 @@
 import Groq from 'groq-sdk'
 import { ChatCompletionMessageParam } from 'groq-sdk/resources/chat.mjs'
-import { TRelatedColumn } from '@/types/relatedColumn'
-import { ChatCompletion } from 'groq-sdk/src/resources/chat.js'
-import { Columns } from './columns'
+import { ChatCompletion } from 'groq-sdk/resources/chat.js'
 
 export interface IIAWrapper {
   getRelatedColumns(
