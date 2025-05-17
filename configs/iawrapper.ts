@@ -1,7 +1,7 @@
 import Groq from 'groq-sdk'
 import { ChatCompletionMessageParam } from 'groq-sdk/resources/chat.mjs'
 import { ChatCompletion } from 'groq-sdk/resources/chat.js'
-
+const model = process.env.NEXT_PUBLIC_GROQ_MODEL as string
 export interface IIAWrapper {
   getRelatedColumns(
     clientColumns: string,
@@ -116,7 +116,7 @@ Retorne apenas o JSON puro, sem explicações ou formatação adicional.`.trim()
     columnType: string,
   ): Promise<ChatCompletion> {
     return this.client.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model,
       messages: this.createColumnsBody(clientColumns, columnType),
     })
   }
@@ -126,7 +126,7 @@ Retorne apenas o JSON puro, sem explicações ou formatação adicional.`.trim()
     columnType: string,
   ): Promise<ChatCompletion> {
     return this.client.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model,
       messages: this.createDescriptionBody(relatedColumns, columnType),
     })
   }

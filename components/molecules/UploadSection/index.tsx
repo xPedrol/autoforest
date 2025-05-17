@@ -51,7 +51,12 @@ export const UploadSection = ({ index }: Props) => {
     try {
       let apiRes = await iaInstance.getRelatedColumns(headerList, systemList)
       if (apiRes.choices?.[0]?.message.content) {
-        const apiJSONAux = JSON.parse(apiRes.choices[0].message.content)
+        const apiJSONAux = JSON.parse(
+          apiRes.choices[0].message.content.replace(
+            /<think>[\s\S]*?<\/think>/g,
+            '',
+          ),
+        )
         spreadsheet.setRelationship(apiJSONAux)
         apiRes = await iaInstance.getDescription(
           spreadsheet.stringifyRelationship(),
@@ -59,7 +64,9 @@ export const UploadSection = ({ index }: Props) => {
         )
         if (apiRes.choices?.[0]?.message.content) {
           const apiDescription = apiRes.choices[0].message.content
-          spreadsheet.setDescription(apiDescription)
+          spreadsheet.setDescription(
+            apiDescription.replace(/<think>[\s\S]*?<\/think>/g, ''),
+          )
         } else {
           throw new Error('Erro ao tentar detalhar a relação das colunas')
         }
