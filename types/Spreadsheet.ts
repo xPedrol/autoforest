@@ -8,6 +8,8 @@ export interface ISpreadsheet {
   setRelationship(relationship: IRelatedColumn[]): void
   setDescription(description: string): void
   setXlsx(xlsx: Xlsx): void
+  normalizeJsonData(): void
+  reset(): void
 }
 
 export class Spreadsheet implements ISpreadsheet {
@@ -75,12 +77,32 @@ export class Spreadsheet implements ISpreadsheet {
     }
     return uniqueClients.size === this.relationship.length
   }
+
+  private createMapFromRelationship(): Map<string, string> {
+    const map = new Map<string, string>()
+    this.relationship.forEach((column) => {
+      map.set(column.client, column.system)
+    })
+    return map
+  }
+
+  public normalizeJsonData(): Record<string, string>[] {
+    return this.xlsx.normalizeJsonData(this.createMapFromRelationship())
+  }
+
+  public reset(): void {
+    this.relationship = []
+    this.description = ''
+    this.xlsx = new Xlsx()
+  }
 }
 
 export interface ISpreadsheetArray {
   getSpreadsheet(index: number): Spreadsheet
   getAllHeaders(): string[]
   isValid(): boolean
+  length(): number
+  normalizeSpreadsheets(key: string): Record<string, string>[]
 }
 export class SpreadsheetArray implements ISpreadsheetArray {
   private spreadsheets: Spreadsheet[]
@@ -108,5 +130,24 @@ export class SpreadsheetArray implements ISpreadsheetArray {
     return this.spreadsheets.every((spreadsheet) => {
       return spreadsheet.isValid()
     })
+  }
+
+  public length(): number {
+    return this.spreadsheets.length
+  }
+
+  public normalizeSpreadsheets(key: string): Record<string, string>[] {
+    const cadastroNormalized = this.spreadsheets[0].normalizeJsonData()
+    const inventarioNormalized = this.spreadsheets[1].normalizeJsonData()
+    const joined = inventarioNormalized.map((row) => {
+      const cadastroRow = cadastroNormalized.find(
+        (cadastroRow) => cadastroRow[key] === row[key],
+      )
+      if (cadastroRow) {
+        return structuredClone({ ...row, ...cadastroRow })
+      }
+      return structuredClone(row)
+    })
+    return joined
   }
 }

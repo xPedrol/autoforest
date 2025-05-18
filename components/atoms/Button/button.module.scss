@@ -22,3 +22,43 @@
 .large {
   font-size: 16px;
 }
+
+.blue {
+  border-color: var(--blue);
+  color: var(--blue);
+  &:hover {
+    background-color: var(--blue);
+  }
+}
+
+.green {
+  border-color: var(--green);
+  color: var(--green);
+  &:hover {
+    color: #fff;
+    background-color: var(--green);
+  }
+}
+.red {
+  color: var(--red);
+  border-color: var(--red);
+  &:hover {
+    color: #fff;
+    background-color: var(--red);
+  }
+}
+.yellow {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  &:hover {
+    color: #fff;
+    background-color: var(--yellow);
+  }
+}
+.primary {
+  border-color: var(--light-black);
+  &:hover {
+    color: #fff;
+    background-color: var(--light-black);
+  }
+}

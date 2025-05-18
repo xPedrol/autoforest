@@ -25,8 +25,7 @@ const AlertWrapper = () => {
 export default function Entrar() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    console.log(Object.fromEntries(formData.entries()))
+    // const formData = new FormData(event.currentTarget)
   }
   return (
     <main>

@@ -55,6 +55,7 @@ const inventarioColumns = {
 }
 
 export abstract class Columns {
+  static readonly FOREIGN_KEY = 'id_Talhao'
   protected list: string[]
   protected description: Record<string, string>
   public uploadDescription: string

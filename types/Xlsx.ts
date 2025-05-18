@@ -43,9 +43,19 @@ export class Xlsx implements IXlsx {
   private generateJsonData(): void {
     const cols = this.header
     this.jsonData = this.rows
-      .slice(1, 4)
+      .slice(1, this.rows.length)
       .map((row) =>
         cols.reduce((obj, col, i) => ({ ...obj, [col]: row[i] }), {}),
       )
+  }
+
+  public normalizeJsonData(map: Map<string, string>): Record<string, string>[] {
+    return this.jsonData.map((row) => {
+      const newRow: Record<string, string> = {}
+      for (const [client, system] of map.entries()) {
+        newRow[system] = row[client]
+      }
+      return newRow
+    })
   }
 }

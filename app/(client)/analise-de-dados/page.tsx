@@ -5,8 +5,6 @@ import { useState } from 'react'
 import { handleClasses } from '@/utils/handleClasses'
 import { Button } from '@/components/atoms/Button'
 import { useAnalysisStore } from '@/configs/analysisStore'
-import { Alert } from '@/components/atoms/Alert'
-import { AlertCircle, Check } from 'lucide-react'
 const SwitchTab = ({ tab }: { tab: 0 | 1 }) => {
   switch (tab) {
     default:
@@ -18,7 +16,7 @@ const SwitchTab = ({ tab }: { tab: 0 | 1 }) => {
 }
 
 export default function Analysis() {
-  const { spreadsheets } = useAnalysisStore()
+  const { spreadsheets, fk } = useAnalysisStore()
   const [tab, setTab] = useState<0 | 1>(0)
   const handleActiveTabIndexClasses = (currentTab: 0 | 1) => {
     const classes = [style.tabIndex]
@@ -28,9 +26,14 @@ export default function Analysis() {
     return handleClasses(classes)
   }
   const finishUpload = () => {
-    console.log(spreadsheets)
+    const validSpreadsheets = spreadsheets.isValid()
+    if (!validSpreadsheets) {
+      alert('Preencha todos os campos corretamente')
+      return
+    }
+    const normalizedData = spreadsheets.normalizeSpreadsheets(fk)
+    console.log('normalizedData', normalizedData)
   }
-  const validSpreadsheets = spreadsheets.isValid()
   return (
     <main className="mainContainer">
       <div className={style.tabIndexes}>
@@ -47,27 +50,10 @@ export default function Analysis() {
           Inventário
         </div>
       </div>
-      <div className={style.alertContainer}>
-        {validSpreadsheets ? (
-          <Alert
-            icon={<Check />}
-            description="Os dados estão prontos para envio"
-            color="green"
-          />
-        ) : (
-          <Alert
-            icon={<AlertCircle />}
-            description="Os dados não estão prontos para envio. Verifique se os arquivos enviados estão corretos e se todas as colunas estão relacionadas"
-            color="yellow"
-          />
-        )}
-      </div>
       <SwitchTab tab={tab} />
-      {validSpreadsheets && (
-        <div className={style.buttonContainer}>
-          <Button onClick={finishUpload}>Enviar para análise</Button>
-        </div>
-      )}
+      <div className={style.buttonContainer}>
+        <Button onClick={finishUpload}>Enviar para análise</Button>
+      </div>
     </main>
   )
 }

@@ -11,18 +11,21 @@ type Props = {
   index: number
 }
 export const UploadSection = ({ index }: Props) => {
-  console.log('UploadSection')
   const { iaInstance, spreadsheets, columns } = useAnalysisStore()
   const columnType = columns[index]
   const spreadsheet = spreadsheets.getSpreadsheet(index)
   const header = spreadsheet.getXlsx().getHeader()
   const file = spreadsheet.getXlsx().file
+  const setUpdateTimes = useState(0)[1]
   const loadings = [useState(false), useState(false)]
   const loading = loadings[index][0]
   const setLoading = (value: boolean) => {
     loadings[index][1](value)
   }
-  const jsonData = spreadsheet.getXlsx().getJsonData()
+  const jsonDataLimited = []
+  for (let i = 0; i < 3; i++) {
+    jsonDataLimited.push(spreadsheet.getXlsx().getJsonData()[i])
+  }
   const relationship = spreadsheet.getRelationship()
   const description = spreadsheet.getDescription()
 
@@ -47,7 +50,6 @@ export const UploadSection = ({ index }: Props) => {
 
     const headerList = spreadsheet.getXlsx().getHeader().join(', ')
     const systemList = columnType.stringifyDescriptions()
-    debugger
     try {
       let apiRes = await iaInstance.getRelatedColumns(headerList, systemList)
       if (apiRes.choices?.[0]?.message.content) {
@@ -95,6 +97,11 @@ export const UploadSection = ({ index }: Props) => {
     document.querySelector<HTMLInputElement>(`#fileInput-${index}`)?.click()
   }
 
+  const removeFile = () => {
+    spreadsheet.reset()
+    setUpdateTimes((prev) => prev + 1)
+  }
+
   return (
     <>
       <section className={style.analysisSection}>
@@ -115,6 +122,11 @@ export const UploadSection = ({ index }: Props) => {
             <Button format="small" onClick={handleFileUpload}>
               Escolher arquivo
             </Button>
+            {file && (
+              <Button format="small" onClick={removeFile} color="red">
+                Remover arquivo
+              </Button>
+            )}
           </div>
           <input
             id={`fileInput-${index}`}
@@ -138,7 +150,7 @@ export const UploadSection = ({ index }: Props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {jsonData.map((row, i) => (
+                    {jsonDataLimited.map((row, i) => (
                       <tr key={i}>
                         {header.map((h, j) => (
                           <td key={j}>{row[h]}</td>
