@@ -1,5 +1,5 @@
 .button {
-  background-color: #fff;
+  background-color: transparent;
   padding: 20px;
   border: 1px solid var(--light-black);
   cursor: pointer;
@@ -37,6 +37,14 @@
   &:hover {
     color: #fff;
     background-color: var(--green);
+  }
+}
+.dark-green {
+  border-color: var(--dark-green);
+  color: var(--dark-green);
+  &:hover {
+    color: #fff;
+    background-color: var(--dark-green);
   }
 }
 .red {

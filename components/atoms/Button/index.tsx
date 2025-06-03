@@ -5,7 +5,7 @@ type InputSize = 'large' | 'medium' | 'small'
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
   format?: InputSize
-  color?: 'blue' | 'green' | 'red' | 'yellow' | 'primary'
+  color?: 'blue' | 'green' | 'red' | 'yellow' | 'primary' | 'dark-green'
 }
 export const Button = ({ children, format, color, ...rest }: ButtonProps) => {
   const filteredClasses = handleClasses([

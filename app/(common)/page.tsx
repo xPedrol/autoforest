@@ -2,13 +2,14 @@
 import Image from 'next/image'
 import { useEffect } from 'react'
 import style from './page.module.scss'
-import banner from '@/public/images/tree.webp'
 import tree from '@/public/images/tree.webp'
 import { initObserver, unobserve } from '@/utils/intersectionObserver'
 import { Card } from '@/components/atoms/Card'
 import { Input } from '@/components/atoms/Input'
 import { Textarea } from '@/components/atoms/Textarea'
 import { Button } from '@/components/atoms/Button'
+import { AlarmClock, BrainCircuit, Ruler, TreePine } from 'lucide-react'
+import Header from '@/components/molecules/Header'
 export default function Home() {
   useEffect(() => {
     const sections = [
@@ -18,6 +19,9 @@ export default function Home() {
       ...document.querySelectorAll(`.${style.motivationSection}`),
       ...document.querySelectorAll(`.${style.infoSection}`),
       ...document.querySelectorAll(`.${style.contactSection}`),
+      ...document.querySelectorAll(`.${style.featuresSection}`),
+      ...document.querySelectorAll(`.${style.benefitsSection}`),
+      ...document.querySelectorAll(`.${style.technologySection}`),
     ]
     initObserver(style.inView, sections)
     return () => {
@@ -25,19 +29,24 @@ export default function Home() {
     }
   }, [])
   return (
-    <main className="mainContainer">
+    <main className={style.mainContainer}>
+      <Header />
       <section className={style.bannerSection}>
+        <div className={style.blurBlobLeft}></div>
         <div>
           <h1 className={style.homeTitle} id="homeTitle">
-            Mussum Ipsum, cacilds vidis litro abertis.
+            AI Forest: Revolucionando o Monitoramento Florestal
           </h1>
           <p>
-            Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie
-            leo, vitae iaculis nisl. Cevadis im ampola pa arma uma pindureta.
-            Leite de capivaris, leite de mula manquis sem cabeça.
+            Ideal para empresas que desejam otimizar o manejo florestal, reduzir
+            custos operacionais e eliminar etapas manuais nos processos de
+            análise.
           </p>
+          <Button format="medium" type="button" color="dark-green">
+            Começar agora
+          </Button>
         </div>
-        <div className={style.imageContainer}>
+        {/* <div className={style.imageContainer}>
           <Image
             loading="eager"
             src={banner}
@@ -47,28 +56,96 @@ export default function Home() {
             quality={40}
             priority={true}
           />
-        </div>
+        </div> */}
       </section>
       <section className={style.aboutUsSection} id="about">
         <div>
-          <h2 className={style.title}>Sobre nós</h2>
+          <h2 className={style.title}>Automação do inventário florestal</h2>
           <hr />
           <p>
-            Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite
-            de mula manquis sem cabeça. Aenean aliquam molestie leo, vitae
-            iaculis nisl. Cevadis im ampola pa arma uma pindureta.
+            Utilizando algoritmos de inteligência artificial como redes neurais
+            artificiais (RNAs) e Random Forest, o sistema processa dados de
+            campo, realiza estimativas de volume e altura e entrega relatórios
+            técnicos completos — em poucos minutos.
           </p>
         </div>
       </section>
       <section className={style.goalsSection} id="goals">
         <div className={style.goalsTextContainer}>
           <div className={style.content}>
-            <h2 className={style.title}>Objetivos</h2>
+            <h2 className={style.title}>Economia de tempo e recursos</h2>
             <p>
-              Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris,
-              leite de mula manquis sem cabeça. Aenean aliquam molestie leo,
-              vitae iaculis nisl. Cevadis im ampola pa arma uma pindureta.
+              Os métodos tradicionais de inventário florestal são complexos,
+              caros e suscetíveis a erros, exigindo medições em campo,
+              processamento estatístico e ferramentas especializadas — etapas
+              que demandam tempo e conhecimento técnico.
             </p>
+          </div>
+        </div>
+      </section>
+      <section className={style.featuresSection}>
+        <h2 className={style.title}>Transforme sua realidade</h2>
+        <div className={style.featuresGrid}>
+          <div className={style.featureCard}>
+            <TreePine />
+            <h3>Elimina a etapa de cubagem</h3>
+            <p>
+              Substituindo-a por estimativas automáticas com base em
+              inteligência artificial.
+            </p>
+          </div>
+          <div className={style.featureCard}>
+            <Ruler />
+            <h3>Exige apenas três alturas por parcela</h3>
+            <p>
+              Exige apenas três alturas por parcela, reduzindo o esforço de
+              campo sem comprometer a acurácia.
+            </p>
+          </div>
+          <div className={style.featureCard}>
+            <BrainCircuit />
+            <h3>Machine Learning</h3>
+            <p>
+              Automatiza o processamento dos dados brutos do inventário
+              florestal, aplicando algoritmos robustos de machine learning para
+              gerar estimativas de altura, volume e produtividade.
+            </p>
+          </div>
+          <div className={style.featureCard}>
+            <AlarmClock />
+            <h3>Entrega resultados confiáveis em minutos</h3>
+            <p>
+              Entrega resultados confiáveis em minutos, com relatórios prontos
+              para auditoria técnica e tomada de decisão.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className={style.benefitsSection}>
+        <div className={style.benefitsContent}>
+          <h2 className={style.title}>Proposta de Valor</h2>
+          <div className={style.benefitsList}>
+            <div className={style.benefitItem}>
+              <h3>Economia de tempo e recursos</h3>
+              <p>
+                Substitui planilhas e scripts manuais por uma plataforma robusta
+                e intuitiva.
+              </p>
+            </div>
+            <div className={style.benefitItem}>
+              <h3>Modelos validados</h3>
+              <p>
+                As estimativas são baseadas em grandes bases florestais, com uso
+                de inteligência artificial aplicada à silvicultura
+              </p>
+            </div>
+            <div className={style.benefitItem}>
+              <h3>Auditorias e Certificações</h3>
+              <p>
+                Exporte relatórios em formato técnico e pronto para integração
+                com ERPs e sistemas de gestão florestal.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -93,12 +170,13 @@ export default function Home() {
         <div>
           <div className={style.content}>
             <h2 className={style.title}>
-              Por que <span>usar ?</span>
+              A equipe <span>AI Forest</span>
             </h2>
             <p>
-              Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris,
-              leite de mula manquis sem cabeça. Aenean aliquam molestie leo,
-              vitae iaculis nisl. Cevadis im ampola pa arma uma pindureta.
+              O AI Forest é o resultado da união entre pesquisa científica,
+              tecnologia de dados e gestão estratégica aplicada ao setor
+              florestal. A equipe fundadora da Auto Forest combina expertise
+              técnica, acadêmica e de mercado
             </p>
           </div>
         </div>
@@ -106,22 +184,29 @@ export default function Home() {
       <section className={style.infoSection} id="plans">
         <div className={style.cardAnimation}>
           <Card
-            title="Plano 1"
-            description="Descrição do Plano 1"
+            title="Dr. Pablo Falco Lopes (CEO)"
+            description="Pós Doutorando, Doutor e Mestre em Ciência Florestal pela Universidade Federal de Viçosa (UFV), com foco em mensuração e manejo florestal. Especialista em modelagem matemática, inteligência artificial, pesquisa operacional e análise de dados aplicados à engenharia florestal."
             buttonText="Saiba mais"
           />
         </div>
         <div className={style.cardAnimation}>
           <Card
-            title="Plano 2"
-            description="Descrição do Plano 2"
+            title="Sinara Silva P. Lopes"
+            description="Economista, com especializações em controladoria, finanças e planejamento tributário. Possui ampla experiência em gestão administrativo-financeira, auditoria, implantação de sistemas de gestão (ISO) e atuação como CFO em empresas de médio porte."
             buttonText="Saiba mais"
           />
         </div>
         <div className={style.cardAnimation}>
           <Card
-            title="Plano 3"
-            description="Descrição do Plano 3"
+            title="Salim Calil Salim Neto"
+            description="Engenheiro Florestal pela Universidade Federal de Viçosa (UFV), com Mestrado e Doutorado em Ciências Florestais pela Universidade Federal do Espírito Santo (UFES). Possui sólida experiência em ecologia e manejo de florestas tropicais, atuando com foco em modelagem de ecossistemas florestais, dinâmica de crescimento e estrutura."
+            buttonText="Saiba mais"
+          />
+        </div>
+        <div className={style.cardAnimation}>
+          <Card
+            title="Letícia Falco Lopes"
+            description="Desenhista Industrial, com experiência em marketing, design estratégico, identidade visual e suporte à comunicação institucional de soluções tecnológicas."
             buttonText="Saiba mais"
           />
         </div>
