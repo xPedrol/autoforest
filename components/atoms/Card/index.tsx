@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { AnchorButton } from '../AnchorButton'
-import Ney from '@/public/images/ney.jpg'
+import UserPlaceholder from '@/public/images/user.jpg'
 import style from './card.module.scss'
 type CardProps = {
   title: string
@@ -12,7 +12,7 @@ export const Card = ({ title, description, buttonText, href }: CardProps) => {
   return (
     <article className={`${style.card}`}>
       <div className={style.imageContainer}>
-        <Image src={Ney} alt={title} fill />
+        <Image src={UserPlaceholder} alt={title} fill />
       </div>
       <div className={style.content}>
         <h3>{title}</h3>
