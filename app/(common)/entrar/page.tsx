@@ -8,6 +8,7 @@ import { Check } from 'lucide-react'
 import { Alert } from '@/components/atoms/Alert'
 import { Suspense } from 'react'
 import { signIn } from 'next-auth/react'
+import Header from '@/components/molecules/Header'
 const AlertWrapper = () => {
   const params = useSearchParams()
   const signin = params.get('signin') === 'true'
@@ -42,34 +43,37 @@ export default function Entrar() {
     }
   }
   return (
-    <main>
-      <div className={style.container}>
-        <Suspense>
-          <AlertWrapper />
-        </Suspense>
-        <h1>Entrar</h1>
-        <form onSubmit={handleSubmit}>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Digite seu email..."
-            required
-          />
-          <Input
-            name="password"
-            type="password"
-            placeholder="Digite sua senha..."
-            required
-          />
-          <Link href="/recuperar-senha" className={style.link}>
-            Esqueci minha senha
+    <>
+      <Header />
+      <main>
+        <div className={style.container}>
+          <Suspense>
+            <AlertWrapper />
+          </Suspense>
+          <h1>Entrar</h1>
+          <form onSubmit={handleSubmit}>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Digite seu email..."
+              required
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="Digite sua senha..."
+              required
+            />
+            <Link href="/recuperar-senha" className={style.link}>
+              Esqueci minha senha
+            </Link>
+            <Button type="submit">Enviar</Button>
+          </form>
+          <Link href="/cadastrar" className={style.link}>
+            Não tem uma conta? Cadastre-se
           </Link>
-          <Button type="submit">Enviar</Button>
-        </form>
-        <Link href="/cadastrar" className={style.link}>
-          Não tem uma conta? Cadastre-se
-        </Link>
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   )
 }

@@ -10,6 +10,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/entrar',
   },
   debug: true,
+  trustHost: true,
   providers: [
     Credentials({
       name: 'Credentials',

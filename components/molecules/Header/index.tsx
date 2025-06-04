@@ -21,6 +21,9 @@ const NavbarItems = () => {
       <Link href="/analise-de-dados" prefetch={false} className={style.navLink}>
         Analisar Planilha
       </Link>
+      <Link href="/entrar" prefetch={false} className={style.navLink}>
+        Entrar
+      </Link>
     </>
   )
 }
