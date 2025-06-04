@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import style from './page.module.scss'
 import tree from '@/public/images/tree.webp'
 import { initObserver, unobserve } from '@/utils/intersectionObserver'
-import { Card } from '@/components/atoms/Card'
+import { HeroCard } from '@/components/atoms/HeroCard'
 import { Input } from '@/components/atoms/Input'
 import { Textarea } from '@/components/atoms/Textarea'
 import { Button } from '@/components/atoms/Button'
@@ -223,28 +223,28 @@ export default function Home() {
       </section>
       <section className={style.infoSection} id="plans">
         <div className={style.cardAnimation}>
-          <Card
+          <HeroCard
             title="Dr. Pablo Falco Lopes (CEO)"
             description="Pós Doutorando, Doutor e Mestre em Ciência Florestal pela Universidade Federal de Viçosa (UFV), com foco em mensuração e manejo florestal. Especialista em modelagem matemática, inteligência artificial, pesquisa operacional e análise de dados aplicados à engenharia florestal."
             buttonText="Saiba mais"
           />
         </div>
         <div className={style.cardAnimation}>
-          <Card
+          <HeroCard
             title="Sinara Silva P. Lopes"
             description="Economista, com especializações em controladoria, finanças e planejamento tributário. Possui ampla experiência em gestão administrativo-financeira, auditoria, implantação de sistemas de gestão (ISO) e atuação como CFO em empresas de médio porte."
             buttonText="Saiba mais"
           />
         </div>
         <div className={style.cardAnimation}>
-          <Card
+          <HeroCard
             title="Salim Calil Salim Neto"
             description="Engenheiro Florestal pela Universidade Federal de Viçosa (UFV), com Mestrado e Doutorado em Ciências Florestais pela Universidade Federal do Espírito Santo (UFES). Possui sólida experiência em ecologia e manejo de florestas tropicais, atuando com foco em modelagem de ecossistemas florestais, dinâmica de crescimento e estrutura."
             buttonText="Saiba mais"
           />
         </div>
         <div className={style.cardAnimation}>
-          <Card
+          <HeroCard
             title="Letícia Falco Lopes"
             description="Desenhista Industrial, com experiência em marketing, design estratégico, identidade visual e suporte à comunicação institucional de soluções tecnológicas."
             buttonText="Saiba mais"

@@ -3,26 +3,43 @@ import { Input } from '@/components/atoms/Input'
 import style from './signin.module.scss'
 import { Button } from '@/components/atoms/Button'
 import Link from 'next/link'
-import { setUser } from '@/actions/user'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { registerUser } from '@/configs/requests'
+import { Suspense, useState } from 'react'
+import { Alert } from '@/components/atoms/Alert'
+import { Check } from 'lucide-react'
+
 export default function Cadastrar() {
   const router = useRouter()
+  const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     try {
-      const res = await setUser(Object.fromEntries(formData.entries()))
+      debugger
+      if (formData.get('password') !== formData.get('passwordConfirmation')) {
+        throw new Error('As senhas não conferem.')
+      }
+      const res = await registerUser({
+        nome: formData.get('name') as string,
+        email: formData.get('email') as string,
+        senha: formData.get('password') as string,
+      })
+      console.log('res', res)
       if ('error' in res) {
-        throw new Error(res.message)
+        throw new Error(res.error.message)
       }
       router.push('/entrar?signin=true')
     } catch (err) {
-      alert(String(err))
+      setError(String(err))
     }
   }
   return (
     <main>
       <div className={style.container}>
+        {error && (
+          <Alert icon={<Check size={32} />} color="red" description={error} />
+        )}
         <h1>Cadastrar</h1>
         <form onSubmit={handleSubmit}>
           <Input

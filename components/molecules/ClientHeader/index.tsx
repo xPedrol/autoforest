@@ -3,8 +3,10 @@ import Link from 'next/link'
 import style from './clientHeader.module.scss'
 import { AlignJustify, X } from 'lucide-react'
 import { useResponsiveMenu } from '@/hooks/useResponsiveMenu'
+import { signOut, useSession } from 'next-auth/react'
 
 const NavbarItems = () => {
+  const { data: session } = useSession()
   return (
     <>
       <Link href="/painel-de-controle" className={style.navLink}>
@@ -13,12 +15,20 @@ const NavbarItems = () => {
       <Link href="/analise-de-dados" className={style.navLink}>
         Analisar Planilha
       </Link>
-      {/* <div className={style.profile}>
-        <p className={style.profileName}>Nome do Usuário</p>/
-        <Link href="/logout" className={style.profileLogout}>
-          Deslogar
-        </Link>
-      </div> */}
+      {session?.user && (
+        <div className={style.profile}>
+          <p className={style.profileName}>
+            {session?.user?.name || 'Usuário Desconhecido'}
+          </p>
+          /
+          <p
+            onClick={async () => await signOut()}
+            className={style.profileLogout}
+          >
+            Deslogar
+          </p>
+        </div>
+      )}
     </>
   )
 }

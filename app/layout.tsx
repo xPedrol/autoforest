@@ -1,5 +1,6 @@
 import './globals.scss'
 import type { Metadata } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import localFont from 'next/font/local'
 const atlassianFont = localFont({ src: './atlassian-sans.woff2' })
 export const metadata: Metadata = {
@@ -67,7 +68,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={atlassianFont.className}>{children}</body>
+      <body className={atlassianFont.className}>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   )
 }

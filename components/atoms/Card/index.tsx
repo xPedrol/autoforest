@@ -11,18 +11,13 @@ type CardProps = {
 export const Card = ({ title, description, buttonText, href }: CardProps) => {
   return (
     <article className={`${style.card}`}>
-      <div className={style.imageContainer}>
-        <Image src={UserPlaceholder} alt={title} fill />
-      </div>
-      <div className={style.content}>
-        <h3>{title}</h3>
-        <p>{description}</p>
-        {href && (
-          <AnchorButton format="small" href={href} className={style.link}>
-            {buttonText}
-          </AnchorButton>
-        )}
-      </div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      {href && (
+        <AnchorButton format="small" href={href} className={style.link}>
+          {buttonText}
+        </AnchorButton>
+      )}
     </article>
   )
 }

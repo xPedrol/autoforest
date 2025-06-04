@@ -1,5 +1,5 @@
-import { Card } from '@/components/atoms/Card'
 import style from './dashboard.module.scss'
+import { Card } from '@/components/atoms/Card'
 export default function Dashboard() {
   return (
     <main className="mainContainer">
