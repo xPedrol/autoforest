@@ -22,10 +22,10 @@
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-
   a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
     color: inherit;
     font-weight: 700;

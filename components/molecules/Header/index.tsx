@@ -3,6 +3,7 @@ import Link from 'next/link'
 import style from './header.module.scss'
 import { AlignJustify, X } from 'lucide-react'
 import { useResponsiveMenu } from '@/hooks/useResponsiveMenu'
+import { TreeIcon } from '@/components/atoms/Icons/Tree'
 const NavbarItems = () => {
   return (
     <>
@@ -33,7 +34,10 @@ export default function Header() {
     <header className={style.header}>
       <div className={style.container}>
         <div className={style.logo}>
-          <Link href="/">AI Forest</Link>
+          <Link href="/">
+            <TreeIcon />
+            AI Forest
+          </Link>
         </div>
         <div className={style.burger} onClick={toggleMenu}>
           {!burgerMenuOpened ? <AlignJustify size={32} /> : <X size={32} />}
