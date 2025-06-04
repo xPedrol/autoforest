@@ -81,6 +81,17 @@
     left: 50%;
     transform: translateX(-50%) scale(1.5);
     z-index: -1;
+    animation: blobLeft 5s ease-in-out infinite alternate;
+    @keyframes blobLeft {
+      0% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1.5);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(2);
+      }
+    }
   }
 
   @media (max-width: 768px) {

@@ -2,9 +2,16 @@
   display: block;
   padding: 30px 0;
   color: var(--light-black);
-  background: transparent !important;
+  background: transparent;
   position: relative;
   z-index: 3;
+  margin-left: -20px;
+  margin-right: -20px;
+  transition: background 0.8s ease-in-out;
+  &.background {
+    background: var(--white) !important;
+    transition: none;
+  }
 }
 
 .container {

@@ -151,7 +151,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={style.motivationSection} id="motivation">
+      <section className={style.motivationSection} id="equipe">
         <Image
           loading="lazy"
           className={style.tree}
@@ -177,7 +177,7 @@ export default function Home() {
             <p>
               O AI Forest é o resultado da união entre pesquisa científica,
               tecnologia de dados e gestão estratégica aplicada ao setor
-              florestal. A equipe fundadora da Auto Forest combina expertise
+              florestal. A equipe fundadora da AI Forest combina expertise
               técnica, acadêmica e de mercado
             </p>
           </div>
@@ -213,9 +213,9 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className={style.faqSection}>
+      <section className={style.faqSection} id="faqSection">
         <div className={style.faqHeader}>
-          <h2 className={style.title}>Perguntas que você pode ter</h2>
+          <h2 className={style.title}>Perguntas Frequentes</h2>
         </div>
         <div className={style.faqList}>
           {faqItems.map((item) => (

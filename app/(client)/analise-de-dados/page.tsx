@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { handleClasses } from '@/utils/handleClasses'
 import { Button } from '@/components/atoms/Button'
 import { useAnalysisStore } from '@/configs/analysisStore'
+
 const SwitchTab = ({ tab }: { tab: 0 | 1 }) => {
   switch (tab) {
     default:
@@ -27,23 +28,23 @@ export default function Analysis() {
   }
 
   const uploadFiles = async (cadastroFile: File, inventarioFile: File) => {
-    const formData = new FormData();
-    formData.append('cadastro', cadastroFile);
-    formData.append('inventario', inventarioFile);
+    const formData = new FormData()
+    formData.append('cadastro', cadastroFile)
+    formData.append('inventario', inventarioFile)
 
     const response = await fetch('http://127.0.0.1:8000/upload', {
       method: 'POST',
       body: formData,
-    });
+    })
 
     if (!response.ok) {
-      throw new Error('Erro no upload');
+      throw new Error('Erro no upload')
     }
 
-    const data = await response.json();
-    console.log(data);
-    return data;
-  };
+    const data = await response.json()
+    console.log(data)
+    return data
+  }
 
   const finishUpload = () => {
     const validSpreadsheets = spreadsheets.isValid()

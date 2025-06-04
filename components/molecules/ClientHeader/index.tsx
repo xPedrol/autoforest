@@ -28,7 +28,7 @@ export default function ClientHeader() {
     <header className={style.header}>
       <div className={style.container}>
         <div className={style.logo}>
-          <Link href="/">Auto Forest</Link>
+          <Link href="/">AI Forest</Link>
         </div>
         <div className={style.burger} onClick={toggleMenu}>
           {!burgerMenuOpened ? <AlignJustify size={32} /> : <X size={32} />}

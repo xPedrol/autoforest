@@ -8,8 +8,10 @@ export const useResponsiveMenu = ({ style }: Menu) => {
   const [burgerMenuOpened, setBurgerMenuOpened] = useState(false)
   const toggleMenu = () => {
     const burgerMenu = document.querySelector(`.${style.burgerMenu}`)
+    const header = document.querySelector(`.${style.header}`)
     if (!burgerMenu) return
     setBurgerMenuOpened(burgerMenu.classList.toggle(style.inView))
+    header?.classList.toggle(style.background)
   }
   useEffect(() => {
     const burgerMenu = document.querySelector(`.${style.burgerMenu}`)

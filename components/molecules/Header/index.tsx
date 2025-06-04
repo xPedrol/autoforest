@@ -9,17 +9,11 @@ const NavbarItems = () => {
       <Link href="/" className={style.navLink}>
         Home
       </Link>
-      <Link href="/#about" className={style.navLink}>
-        Sobre
+      <Link href="/#equipe" className={style.navLink}>
+        Equipe
       </Link>
-      <Link href="/#goals" className={style.navLink}>
-        Objetivos
-      </Link>
-      <Link href="/#motivation" className={style.navLink}>
-        Motivação
-      </Link>
-      <Link href="/#plans" className={style.navLink}>
-        Planos
+      <Link href="/#faqSection" className={style.navLink}>
+        Perguntas
       </Link>
       <Link href="/#contact" className={style.navLink}>
         Contato
@@ -36,7 +30,7 @@ export default function Header() {
     <header className={style.header}>
       <div className={style.container}>
         <div className={style.logo}>
-          <Link href="/">Auto Forest</Link>
+          <Link href="/">AI Forest</Link>
         </div>
         <div className={style.burger} onClick={toggleMenu}>
           {!burgerMenuOpened ? <AlignJustify size={32} /> : <X size={32} />}
