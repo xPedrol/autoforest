@@ -27,24 +27,32 @@ export default function Analysis() {
     return handleClasses(classes)
   }
 
-  const uploadFiles = async (cadastroFile: File, inventarioFile: File) => {
-    const formData = new FormData()
-    formData.append('cadastro', cadastroFile)
-    formData.append('inventario', inventarioFile)
+  const uploadFiles = async (
+    cadastroFile: File,
+    inventarioFile: File,
+    token: string // ⬅️ Adicione o token JWT como argumento
+  ) => {
+    const formData = new FormData();
+    formData.append('cadastro', cadastroFile);
+    formData.append('inventario', inventarioFile);
 
     const response = await fetch('http://127.0.0.1:8000/upload', {
       method: 'POST',
       body: formData,
-    })
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!response.ok) {
-      throw new Error('Erro no upload')
+      const errorText = await response.text();
+      throw new Error(`Erro no upload: ${errorText}`);
     }
 
-    const data = await response.json()
-    console.log(data)
-    return data
-  }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  };
 
   const finishUpload = () => {
     const validSpreadsheets = spreadsheets.isValid()
@@ -56,7 +64,10 @@ export default function Analysis() {
     console.log('normalizedData', normalizedData)
     const cadastroFile = spreadsheets.getSpreadsheet(0).getXlsx().getFile()
     const inventarioFile = spreadsheets.getSpreadsheet(1).getXlsx().getFile()
-    const ans = uploadFiles(cadastroFile, inventarioFile)
+
+    // Nao sei como armazena token no front end
+    const token = "your_jwt_token_here"; // ⬅️ Substitua pelo seu token JWT real
+    const ans = uploadFiles(cadastroFile, inventarioFile, token)
     console.log('ans: ', ans)
   }
 

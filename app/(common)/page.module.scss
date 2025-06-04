@@ -107,8 +107,12 @@
     @media (min-width: 1200px) {
       font-size: 70px;
     }
-    @media (max-width: 400px) {
-      font-size: 12vw;
+    @media (max-width: 500px) {
+      font-size: 9vw;
+    }
+    span {
+      color: var(--dark-green);
+      white-space: nowrap;
     }
   }
 
@@ -185,18 +189,34 @@
 }
 
 .goalsSection {
+  position: relative;
   @extend .defaultContainer;
   margin: 6rem auto;
   width: 100%;
-  background-size: cover;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('/images/forest.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   padding: 8rem 0;
   color: white;
   border-radius: 15px;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+  &:hover {
+    .forestImage {
+      transform: scale(1.2);
+    }
+  }
+  .forestImage {
+    filter: brightness(0.4);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.8s ease-in-out;
+    background-attachment: fixed;
+  }
 
   &.inView {
     .content {
@@ -212,7 +232,7 @@
     transform: translateX(-100px);
 
     @media (max-width: 768px) {
-      padding: 0 1.5rem;
+      padding: 0 0.5rem;
       text-align: center;
     }
 
@@ -387,10 +407,14 @@
 .featuresSection {
   @extend .defaultContainer;
   margin: 6rem auto;
-
+  gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  .buttonContainer {
+    text-align: center;
+  }
   h2 {
     text-align: center;
-    margin-bottom: 4rem;
     color: var(--dark-green);
   }
 
@@ -440,19 +464,26 @@
 .benefitsSection {
   @extend .defaultContainer;
   margin: 6rem auto;
+  gap: 4rem;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(
     160deg,
     rgba(var(--light-green-rgb), 0.1) 0%,
     rgba(var(--dark-green-rgb), 0.05) 100%
   );
   border-radius: 20px;
-
+  .buttonContainer {
+    text-align: center;
+  }
   .benefitsContent {
     text-align: center;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
 
     h2 {
       color: var(--dark-green);
-      margin-bottom: 3rem;
     }
 
     .benefitsList {

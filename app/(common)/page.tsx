@@ -12,7 +12,9 @@ import { AlarmClock, BrainCircuit, Ruler, TreePine } from 'lucide-react'
 import Header from '@/components/molecules/Header'
 import { FaqItem } from '@/components/atoms/FaqItem'
 import { faqItems } from '@/configs/faq'
+import { useRouter } from 'next/navigation'
 export default function Home() {
+  const router = useRouter()
   useEffect(() => {
     const sections = [
       ...document.querySelectorAll(`.${style.goalsSection}`),
@@ -30,6 +32,9 @@ export default function Home() {
       unobserve(sections)
     }
   }, [])
+  const goToAnalisys = () => {
+    router.push('/analise-de-dados')
+  }
   return (
     <main className={style.mainContainer}>
       <Header />
@@ -37,14 +42,19 @@ export default function Home() {
         <div className={style.blurBlobLeft}></div>
         <div>
           <h1 className={style.homeTitle} id="homeTitle">
-            AI Forest: Revolucionando o Monitoramento Florestal
+            AI Forest: <span>Revolucionando o</span> Monitoramento Florestal
           </h1>
           <p>
             Ideal para empresas que desejam otimizar o manejo florestal, reduzir
             custos operacionais e eliminar etapas manuais nos processos de
             análise.
           </p>
-          <Button format="medium" type="button" color="dark-green">
+          <Button
+            format="large"
+            type="button"
+            color="dark-green"
+            onClick={goToAnalisys}
+          >
             Começar agora
           </Button>
         </div>
@@ -72,7 +82,15 @@ export default function Home() {
           </p>
         </div>
       </section>
-      {/* <section className={style.goalsSection} id="goals">
+      <section className={style.goalsSection} id="goals">
+        <Image
+          className={style.forestImage}
+          loading="lazy"
+          src={'/images/toco.jpg'}
+          alt="Forest Image"
+          fill
+          quality={100}
+        />
         <div className={style.goalsTextContainer}>
           <div className={style.content}>
             <h2 className={style.title}>Economia de tempo e recursos</h2>
@@ -84,7 +102,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section> */}
+      </section>
       <section className={style.featuresSection}>
         <h2 className={style.title}>Transforme sua realidade</h2>
         <div className={style.featuresGrid}>
@@ -122,6 +140,16 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className={style.buttonContainer}>
+          <Button
+            format="large"
+            type="button"
+            color="dark-green"
+            onClick={goToAnalisys}
+          >
+            Começar agora
+          </Button>
+        </div>
       </section>
       <section className={style.benefitsSection}>
         <div className={style.benefitsContent}>
@@ -149,6 +177,16 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+        <div className={style.buttonContainer}>
+          <Button
+            format="large"
+            type="button"
+            color="dark-green"
+            onClick={goToAnalisys}
+          >
+            Começar agora
+          </Button>
         </div>
       </section>
       <section className={style.motivationSection} id="equipe">
