@@ -399,6 +399,9 @@
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     justify-content: center;
     gap: 1rem;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
 
     .featureCard {
       background: #fff;

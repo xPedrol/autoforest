@@ -72,7 +72,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className={style.goalsSection} id="goals">
+      {/* <section className={style.goalsSection} id="goals">
         <div className={style.goalsTextContainer}>
           <div className={style.content}>
             <h2 className={style.title}>Economia de tempo e recursos</h2>
@@ -84,7 +84,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
       <section className={style.featuresSection}>
         <h2 className={style.title}>Transforme sua realidade</h2>
         <div className={style.featuresGrid}>
