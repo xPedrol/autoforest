@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import { AnchorButton } from '../AnchorButton'
-import UserPlaceholder from '@/public/images/user.jpg'
 import style from './card.module.scss'
 type CardProps = {
   title: string

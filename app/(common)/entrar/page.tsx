@@ -3,7 +3,7 @@ import { Input } from '@/components/atoms/Input'
 import style from './login.module.scss'
 import { Button } from '@/components/atoms/Button'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Check } from 'lucide-react'
 import { Alert } from '@/components/atoms/Alert'
 import { Suspense } from 'react'
@@ -24,8 +24,6 @@ const AlertWrapper = () => {
   )
 }
 export default function Entrar() {
-  const router = useRouter()
-  const params = useSearchParams()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
