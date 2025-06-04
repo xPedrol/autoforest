@@ -1,23 +1,31 @@
 .mainContainer {
   padding: 0px 0 40px 0;
+
   @media (max-width: 1600px) {
     padding-inline: 15px;
   }
+
   overflow: hidden;
 }
+
 .defaultContainer {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  @media (max-width: 1600px) {
+    padding: 0;
+  }
 }
 
 @keyframes upDown {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -28,6 +36,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0px);
@@ -39,11 +48,13 @@
   font-size: 50px;
   font-weight: 900;
   line-height: 1.2;
+
   span {
     white-space: nowrap;
     color: var(--light-green);
   }
 }
+
 .bannerSection {
   min-height: 70dvh;
   @extend .defaultContainer;
@@ -76,11 +87,18 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
+
   text-align: center;
+
   .homeTitle {
     @extend .title;
-    font-size: 70px;
     margin-bottom: 1.5rem;
+    @media (min-width: 1200px) {
+      font-size: 70px;
+    }
+    @media (max-width: 400px) {
+      font-size: 12vw;
+    }
   }
 
   p {
@@ -99,6 +117,25 @@
   }
 }
 
+.faqSection {
+  @extend .defaultContainer;
+  margin: 6rem auto;
+  background: rgba(var(--light-green-rgb), 0.1);
+  border-radius: 15px;
+  max-width: 1200px;
+  h2 {
+    text-align: center;
+    @extend .title;
+    margin-bottom: 40px;
+  }
+
+  .faqList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
 .imageContainer {
   img {
     width: 100%;
@@ -107,6 +144,7 @@
     border-radius: 10px;
   }
 }
+
 .aboutUsSection {
   @extend .defaultContainer;
   margin: 6rem auto;
@@ -134,6 +172,7 @@
     color: var(--light-black);
   }
 }
+
 .goalsSection {
   @extend .defaultContainer;
   margin: 6rem auto;
@@ -182,8 +221,7 @@
 
 .motivationSection {
   position: relative;
-  margin: 8rem auto;
-  padding: 6rem 0;
+  margin-top: 6rem;
 
   .content {
     text-align: center;
@@ -233,6 +271,7 @@
       transform: translateY(0);
       transition: all 0.8s ease-in-out;
     }
+
     .tree,
     .tree2 {
       transform: translateX(0) rotate(0);
@@ -249,12 +288,12 @@
 
 .infoSection {
   @extend .defaultContainer;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
+  margin-top: 6rem;
   gap: 2rem;
-  margin: 6rem auto;
-  padding: 2rem 0;
-
+  max-width: 1200px;
   .cardAnimation {
     opacity: 0;
     transform: translateY(30px);
@@ -270,9 +309,11 @@
     .cardAnimation:nth-child(1) {
       transition-delay: 0.2s;
     }
+
     .cardAnimation:nth-child(2) {
       transition-delay: 0.4s;
     }
+
     .cardAnimation:nth-child(3) {
       transition-delay: 0.6s;
     }
@@ -284,18 +325,20 @@
     transform: scale(0.1);
     clip-path: circle(0%);
   }
+
   50% {
     transform: scale(1.3);
   }
+
   100% {
     transform: scale(1);
     clip-path: circle(100%);
   }
 }
+
 .contactSection {
   @extend .defaultContainer;
   margin: 6rem auto;
-  padding: 4rem 0;
   background: rgba(var(--light-green-rgb), 0.1);
   border-radius: 15px;
 
@@ -309,7 +352,6 @@
 
     h2 {
       color: var(--dark-green);
-      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
@@ -330,6 +372,7 @@
     }
   }
 }
+
 .featuresSection {
   @extend .defaultContainer;
   margin: 6rem auto;
@@ -355,6 +398,7 @@
       &:hover {
         transform: scale(1.02);
       }
+
       svg {
         color: var(--dark-green);
         width: 40px;
@@ -362,6 +406,7 @@
         vertical-align: middle;
         margin-bottom: 0.5rem;
       }
+
       h3 {
         color: var(--dark-green);
         font-size: 1.5rem;
@@ -381,7 +426,6 @@
 .benefitsSection {
   @extend .defaultContainer;
   margin: 6rem auto;
-  padding: 4rem 0;
   background: linear-gradient(
     160deg,
     rgba(var(--light-green-rgb), 0.1) 0%,
@@ -491,12 +535,15 @@
       font-size: 50px;
     }
   }
+
   .bannerSection {
     grid-template-columns: 1fr;
   }
+
   .imageContainer {
     display: flex;
     justify-content: center;
+
     img {
       width: 100%;
       max-width: 700px;

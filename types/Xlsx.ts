@@ -18,6 +18,13 @@ export class Xlsx implements IXlsx {
     this.jsonData = []
   }
 
+  public getFile(): File{
+    if (!this.file) {
+      throw new Error('File is not set')
+    }
+    return this.file
+  }
+
   public getHeader(): string[] {
     return this.header
   }

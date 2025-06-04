@@ -10,6 +10,8 @@ import { Textarea } from '@/components/atoms/Textarea'
 import { Button } from '@/components/atoms/Button'
 import { AlarmClock, BrainCircuit, Ruler, TreePine } from 'lucide-react'
 import Header from '@/components/molecules/Header'
+import { FaqItem } from '@/components/atoms/FaqItem'
+import { faqItems } from '@/configs/faq'
 export default function Home() {
   useEffect(() => {
     const sections = [
@@ -209,6 +211,20 @@ export default function Home() {
             description="Desenhista Industrial, com experiência em marketing, design estratégico, identidade visual e suporte à comunicação institucional de soluções tecnológicas."
             buttonText="Saiba mais"
           />
+        </div>
+      </section>
+      <section className={style.faqSection}>
+        <div className={style.faqHeader}>
+          <h2 className={style.title}>Perguntas que você pode ter</h2>
+        </div>
+        <div className={style.faqList}>
+          {faqItems.map((item) => (
+            <FaqItem
+              key={item.question}
+              question={item.question}
+              answer={item.answer}
+            />
+          ))}
         </div>
       </section>
       <section className={style.contactSection} id="contact">
